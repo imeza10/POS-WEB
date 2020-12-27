@@ -147,6 +147,14 @@
             <div style="display: none;" class="new-address-form">
                 
                 <form class="">
+                
+                    <div id="input-group-address" role="group" class="form-group"><label
+                            id="input-group-address__BV_label_" for="address" class="d-block">Correo</label>
+                        <div class="bv-no-focus-ring"><input id="email" type="text" required="required"
+                                class="form-control">
+                        </div>
+                    </div>
+                    
                     <div id="input-group-address" role="group" class="form-group"><label
                             id="input-group-address__BV_label_" for="address" class="d-block">Nombre</label>
                         <div class="bv-no-focus-ring"><input id="name" type="text" required="required"
@@ -166,14 +174,6 @@
                     <div id="input-group-address" role="group" class="form-group"><label
                             id="input-group-address__BV_label_" for="address" class="d-block">Dirección</label>
                         <div class="bv-no-focus-ring"><input id="address" type="text" required="required"
-                                class="form-control">
-
-                        </div>
-                    </div>
-
-                    <div id="input-group-address" role="group" class="form-group"><label
-                            id="input-group-address__BV_label_" for="address" class="d-block">Correo</label>
-                        <div class="bv-no-focus-ring"><input id="email" type="text" required="required"
                                 class="form-control">
 
                         </div>
