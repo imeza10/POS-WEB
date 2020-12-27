@@ -20,7 +20,18 @@
 
                     //$empresa = $_POST["empresa_id"];
                     $empresa = "1";
+                    $domicilio = "0";
                     $session_id = $_SESSION["id_session"];
+
+                    $sql = "SELECT * FROM empresa WHERE empresa_id = '".$empresa."' AND em_state = '1'";
+
+                    $resultado = mysqli_query($con, $sql);
+                    if ($resultado == false || mysqli_num_rows ( $resultado ) === 0){
+
+                    } else{
+                        $reg = mysqli_fetch_array($resultado);
+                        $domicilio = $reg["em_domicilio"];
+                    }
 
                     if(isset($session_id))
                     {
@@ -215,9 +226,15 @@
 
                         </div>
                     </div>
-                    <div class="button-new-address"><button type="submit" class="btn btn-danger">
-                            Guadar Dirección
-                        </button></div>
+                    <div class="button-new-address">
+                        <button type="submit" class="btn btn-danger">
+                                Guadar Dirección
+                        </button>
+                    </div>
+
+                    <div class="carshop_total">
+                        <p id="domicilio">Domicilio: $<?php echo number_format($domicilio); ?></p>
+                    </div>
                 </form>
             </div>
 
