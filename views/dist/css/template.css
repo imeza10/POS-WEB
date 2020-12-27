@@ -1,0 +1,287 @@
+.content-body{
+    background: #fff;
+    padding-bottom: 30px;
+}
+
+.content-header{
+    background: rgb(255, 255, 255);
+}
+
+.content-header h2{
+    color: #cd1322;
+}
+
+#head-search{
+    margin: 0 auto; 
+    text-align: center;
+}
+
+#category{    
+    padding: 20px;
+    margin: 15px;
+}
+
+.col-category{
+    padding: 20px;
+}
+
+.container h1{
+    color: #cd1322;
+}
+
+h4{
+    color: #cd1322;
+}
+
+.product-container{
+    background-color: white;
+    padding: 10px;
+    display: flex;
+    height: auto;
+}
+
+.item-product-image{
+    width: 20%;
+    float: left;
+    padding: 5px;
+    display:block;
+    margin:auto;
+}
+
+.item-product-info{
+    width: 80%;
+    float: left;
+    padding: 20px; 
+}
+
+.product-container h5{
+    font-family: "Comfortaa",sans-serif;
+    line-height: 1;
+    color: #cd1322;
+    margin: 0;
+}
+
+.item-product-description{
+    font-size: 1.2rem;
+    width: 100%;
+    color: gray;
+}
+
+.item-product-price{
+    font-size: 1.5rem;
+    color: rgb(31, 30, 30);
+    clear: both;
+    text-align: inherit;
+}
+
+
+/*
+INICIO ESTILOS PARA PAGE DETALLE.PHP
+*/
+
+.return{
+    
+}
+
+.item-product-image-detail{
+    width: 300px;
+    margin: 0 auto;
+}
+
+.item-product-description-detail{
+    margin-top: 10px;
+    text-align: center;
+}
+
+.instructions h3{
+    color: #cd1322;
+}
+
+.item-product-price-detail{
+    color: #cd1322;
+    margin-top: 5px;
+    font-size: 1.7rem;
+}
+
+#group-cantidad{
+    margin: 0 auto;
+    max-width: 150px;
+}
+
+#group-cantidad output{    
+    text-align: center;
+}
+
+#agregar{
+    width: auto;
+    padding: 10px 10px;
+    margin-top: 10px;
+}
+/*
+FIN ESTILOS PARA PAGE DETALLE.PHP
+*/
+
+/*
+INICIO ESTILOS PARA CARSHOP
+*/
+
+.carshop_total p{
+    display: inline-flexbox;
+    padding: 14px;
+    text-align: right;
+    font-size: 1.7rem;    
+    color: #cd1322;
+    border-radius: 18px;
+}
+
+.pay_carshop{
+    width: 100%;
+    margin: 10px auto;
+    overflow: hidden;
+    padding: 10px 0;
+    /*
+    display: inline;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    background-color: #cd1322;
+    color: white;
+    border-radius: 18px;
+    font-size: 1.3rem;
+    */
+}
+#carshop_delete{   
+    border: 0;
+    margin-block: auto;
+}
+
+.del_car{
+    width: 45px;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+#seguir_comprando{
+    float: left;
+    padding: 15px;
+    background-color: #f96c77;
+    color: white;
+    width: 40%;
+    font-size: 1.4rem;
+    border-radius: 5px;
+}
+
+#pagar{
+    float: right;
+    padding: 15px;
+    background-color: #cd1322;
+    color: white;
+    width: 40%;
+    font-size: 1.4rem;
+    border-radius: 5px;
+}
+
+
+@media screen and (max-width:1000px){
+
+    .item-product-image{
+        width: 30%;
+        float: left;
+        padding: 5px;
+        display:block;
+        margin:auto;
+    }
+    
+    .item-product-info{
+        width: 70%;
+        float: left;
+        padding: 20px; 
+        font-size: .5rem;
+    }
+
+    .col-category{
+        padding: 5px;    
+    }
+
+    h4{
+        font-size: .7rem;
+    }
+}
+
+@media screen and (max-width:800px){
+
+    .item-product-image{
+        width: 40%;
+        float: left;
+        padding: 5px;
+        display:block;
+        margin:auto;
+    }
+    
+    .item-product-info{
+        width: 60%;
+        float: left;
+        padding: 20px; 
+    }
+
+}
+
+@media screen and (max-width:720px){
+
+    .product-container{
+        display: block;
+        margin: 0 auto;
+    }
+
+    .item-product-image{
+        display: contents;
+        background-color: rgb(36, 34, 34);
+    }
+
+    .item-product-info{
+        margin-top: 10px;
+        padding: 0%;
+        clear: both;
+        float: left;
+        width: 100%;
+    }
+
+    .item-product-amount{
+        clear: both;
+        float: left;
+        padding: 0%;
+        margin-bottom: 20px;
+    }
+
+    #del_car{
+        float: right;
+        margin: 0;
+        margin-top: 20px;        
+    }
+
+    .carshop_total{
+        clear: both;        
+    }
+
+    #total{
+        margin-top: 20px;
+        font-size: 1.8rem;
+    }
+
+    #seguir_comprando{
+        font-size: 1.2rem;
+        width: auto;
+    }
+
+    #pagar{
+        font-size: 1.2rem;
+    }
+
+    /** ESTILOS PARA CONFIRMAR COMPRA**/
+
+
+
+    /** FIN ESTILOS PARA CONFIRMAR COMPRA**/
+
+
+}
