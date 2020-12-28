@@ -83,35 +83,23 @@ $(document).ready(function() {
 
     };
 
-    /**METODOS PARA CHARSHOP */
-    /*
-        $(".add-to-cart").click(function(e){
+    /**METODOS PARA SALES */
 
-            var id = $(this).attr('id');
-            console.log("ID: " + id);
-        });
-        */
-
-
-    /**INICIO METODOS SALES */
-
-    $("#__BVID__18").click(function(e) {
-
-        console.log("Click en domicilio");
+    $("#new-address").click(function(e) {
 
         $(".new-address-form").show('1000');
+        $(".vlr-domicilio").show('1000');
+
+        $(".address-new").hide('1000');
+
     });
-
-    $("#__BVID__19").click(function(e) {
-
-        console.log("Click en sitio");
-        $(".new-address-form").hide('1000');
-    });
-
 
     /**FIN METODOS SALES */
 
+
 });
+
+//**INICIO DE FUNCIONES ***/
 
 function btmas(product_id, item, session_id) {
     console.log("Id elemento: " + product_id + ", item: " + item);
@@ -245,3 +233,85 @@ function pagar(session_id) {
 }
 
 /**FIN METODOS CARSHOP */
+
+/**INICIO METODOS SALES */
+
+function domicilio(total) {
+
+    $(".address-new").show('1000');
+    $(".vlr-domi").show('1000');
+    $(".new-address-form").hide('1000');
+
+    var domicilio = $("#domicilio").html().replace('Domicilio: $', '').replace(',', '').replace('.', '');
+
+
+    $("#total").html("Total: $" + (parseFloat(total) + parseFloat(domicilio)).toLocaleString(window.document.documentElement.lang));
+
+    $.ajax({
+        url: "../controller/get_address.php",
+        data: { session_id: session_id },
+        type: "POST",
+        dataType: "json",
+        success: function(datos) {
+
+            console.log(datos);
+
+            if (datos.success == "1") {
+                //toastr.success(datos.message);
+                console.log(datos.message);
+            }
+
+            if (datos.success == "0") {
+                toastr.error(datos.message);
+            }
+
+            if (datos.success == "2") {
+                toastr.warning(datos.message);
+            }
+        }
+    });
+
+}
+
+function sitio(total) {
+
+    $(".new-address-form").hide('1000');
+    $(".address-new").hide('1000');
+    $(".vlr-domi").hide('1000');
+
+    $(".new-address-form").hide('1000');
+    $(".vlr-domicilio").hide('1000');
+
+    $("#total").html("Total: $" + parseFloat(total).toLocaleString(window.document.documentElement.lang));
+
+}
+
+function guardar_address() {
+
+    $.ajax({
+        url: "../controller/add_cliente.php",
+        data: { session_id: session_id },
+        type: "POST",
+        dataType: "json",
+        success: function(datos) {
+
+            console.log(datos);
+
+            if (datos.success == "1") {
+                //toastr.success(datos.message);
+                console.log(datos.message);
+            }
+
+            if (datos.success == "0") {
+                toastr.error(datos.message);
+            }
+
+            if (datos.success == "2") {
+                toastr.warning(datos.message);
+            }
+        }
+    });
+}
+
+
+/**FIN METODOS SALES */
