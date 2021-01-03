@@ -109,9 +109,9 @@
             <div style="display: flex; padding: 20px; text-align: center;" tabindex="-1" role="group"
                 class="bv-no-focus-ring">
 
-                <div style="width: 100%;" class="custom-control custom-radio" onclick="domicilio('<?php echo $total; ?>')">
+                <div style="width: 100%;" class="custom-control custom-radio" >
                     <input type="radio" name="delivery-type" autocomplete="off" class="custom-control-input"
-                        value="domicilio" id="__BVID__18">
+                        value="domicilio" id="__BVID__18" onclick="domicilio('<?php echo $total; ?>','<?php echo $session_id; ?>')">
                     <label class="custom-control-label" for="__BVID__18">
                         <svg id="Capa_1" enable-background="new 0 0 512 512" height="48" fill="#dc3545"
                             viewBox="0 0 512 512" width="48" xmlns="http://www.w3.org/2000/svg">
@@ -125,9 +125,9 @@
                     </label>
                 </div>
 
-                <div style="width: 100%;" class="custom-control custom-radio"  onclick="sitio('<?php echo $total; ?>')">
+                <div style="width: 100%;" class="custom-control custom-radio"  >
                     <input type="radio" name="delivery-type" autocomplete="off" class="custom-control-input"
-                        value="tienda" id="__BVID__19">
+                        value="tienda" id="__BVID__19" onclick="sitio('<?php echo $total; ?>')">
                     <label class="custom-control-label" for="__BVID__19">
                         <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="50" height="50"
@@ -159,9 +159,10 @@
             <div style="display: none;" class="address-new">
                 <div id="input-group-address" role="group" class="form-group">
                     <label id="input-group-type__BV_label_"
-                        for="type" class="d-block">Enviar pedido a:
+                        for="direcciones" class="d-block">Enviar pedido a:
                     </label>
-                    <div class="bv-no-focus-ring"><select id="type" required="required" aria-required="true"
+                    <div class="bv-no-focus-ring">
+                    <select id="direcciones" required="required" aria-required="true"
                             class="custom-select">
                             <option value="">Seleccionar</option>
                             <!-- --->
@@ -180,35 +181,36 @@
 
             <div style="display: none;" class="new-address-form">
                 
-                <form class="">
-
-                    
-                
+                <form id="form-address-new">                
                     <div id="input-group-address" role="group" class="form-group"><label
-                            id="input-group-address__BV_label_" for="address" class="d-block">Correo</label>
-                        <div class="bv-no-focus-ring"><input id="email" type="text" required="required"
+                            id="correo" for="address" class="d-block">Correo</label>
+                        <div class="bv-no-focus-ring">
+                        <input id="email" type="text" required="required"
                         placeholder="Correo electronico" class="form-control">
                         </div>
                     </div>
                     
                     <div id="input-group-address" role="group" class="form-group"><label
-                            id="input-group-address__BV_label_" for="address" class="d-block">Nombre</label>
-                        <div class="bv-no-focus-ring"><input id="name" type="text" required="required"
+                            id="nombre" for="address" class="d-block">Nombre</label>
+                        <div class="bv-no-focus-ring">
+                        <input id="name" type="text" required="required"
                         placeholder="Nombre" class="form-control">
 
                         </div>
                     </div>
 
                     <div id="input-group-address" role="group" class="form-group"><label
-                            id="input-group-address__BV_label_" for="address" class="d-block">Telefono</label>
-                        <div class="bv-no-focus-ring"><input id="phone" type="text" required="required"
+                            id="telefono" for="address" class="d-block">Telefono</label>
+                        <div class="bv-no-focus-ring">
+                        <input id="phone" type="text" required="required"
                             placeholder="Telefono" class="form-control">
                         </div>
                     </div>
 
                     <div id="input-group-address" role="group" class="form-group"><label
-                            id="input-group-address__BV_label_" for="direccion" class="d-block">Dirección</label>
-                        <div class="bv-no-focus-ring"><input id="direccion" type="text"
+                            id="address" for="direccion" class="d-block">Dirección</label>
+                        <div class="bv-no-focus-ring">
+                        <input id="direccion" type="text"
                                 placeholder="Dirección" required="required"
                                 aria-required="true" class="form-control">
 
@@ -217,8 +219,8 @@
 
                     <div id="input-group-type" role="group" class="form-group"><label id="input-group-type__BV_label_"
                             for="type" class="d-block">Tipo de domicilio</label>
-                        <div class="bv-no-focus-ring"><select id="type" required="required" aria-required="true"
-                                class="custom-select">
+                        <div class="bv-no-focus-ring">
+                        <select id="type" required="required" aria-required="true" class="custom-select">
                                 <option value="">Seleccionar</option>
                                 <option value="Casa">Casa</option>
                                 <option value="Apto">Apartamento</option>
@@ -229,35 +231,40 @@
                     </div>
 
                     <div id="input-group-address" role="group" class="form-group"><label
-                            id="input-group-address__BV_label_" for="complement"
+                            id="num_domicilio" for="complement"
                             class="d-block">Apartamento/Casa</label>
-                        <div class="bv-no-focus-ring"><input id="complement" type="text"
+                        <div class="bv-no-focus-ring">
+                        <input id="detail_address" type="text"
                                 placeholder="Número, torre, bloque..." class="form-control">
 
                         </div>
                     </div>
                     <div id="input-group-address" role="group" class="form-group"><label
-                            id="input-group-address__BV_label_" for="alias" class="d-block">Alias de la dirección</label>
-                        <div class="bv-no-focus-ring"><input id="alias" type="text"
+                            id="alias" for="alias" class="d-block">Alias de la dirección</label>
+                        <div class="bv-no-focus-ring">
+                        <input id="alias_address" type="text"
                                 placeholder="¿Cómo quieres llamar esta dirección?" required="required"
                                 aria-required="true" class="form-control">
 
                         </div>
                     </div>
                     <div id="input-group-address" role="group" class="form-group"><label
-                            id="input-group-address__BV_label_" for="details" class="d-block">Detalles</label>
-                        <div class="bv-no-focus-ring"><textarea id="details"
+                            id="descripcion" for="details" class="d-block">Detalles</label>
+                        <div class="bv-no-focus-ring">
+                        <textarea id="details"
                                 placeholder="Agrega instrucciones, barrio, piso, zona..." wrap="soft"
                                 class="form-control" style="resize: none; overflow-y: scroll; height: 86px;"></textarea>
 
                         </div>
                     </div>
-                    <div class="button-new-address">
-                        <button type="submit" class="btn btn-danger" onclick="guardar_address('','','','','')">
-                                Guadar Dirección
-                        </button>
-                    </div>
                 </form>
+                
+                <div>
+                    <button class="btn btn-danger" onclick="guardar_address('<?php echo $session_id; ?>', '<?php echo $total; ?>')">
+                            Guadar Dirección
+                    </button>
+                </div>
+                
             </div>
 
             <div style="display : none;" class="vlr-domi">

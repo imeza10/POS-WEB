@@ -2,6 +2,7 @@
 
     include 'config/conexion.php';
 
+    $email = $_POST["email"];
     $name = $_POST["name"];
     $phone = $_POST["phone"];
     $address = $_POST["address"];
@@ -10,34 +11,33 @@
     $alias_address = $_POST["alias_address"];
     $instructions_address = $_POST["instructions_address"];
     $session_id = $_POST["session_id"];
-
+/*
+    $email = "algo";
+    $name = "algo";
+    $phone = "algo";
+    $address = "algo";
+    $type_address = "algo";
+    $detail_address = "algo";
+    $alias_address = "algo";
+    $instructions_address = "algo";
+    $session_id = "algo";
+*/
 
     if(isset($session_id))
     {
-        $sql = "SELECT * FROM carshop WHERE carshop_session_id = '".$session_id."' AND carshop_product_id = '".$product_id."' AND carshop_item_active = '1'; ";
-        $resultado = mysqli_query($con, $sql);
+        $sql = "INSERT INTO clientes VALUES('0','".$email."','".$name."','".$phone."','".$address."','".$type_address."','".$detail_address."','".$alias_address."','".$instructions_address."','".$session_id."', (SELECT NOW()) )";
+        $resultado = mysqli_query($con, $sql);  
 
-        if ($resultado == false || mysqli_num_rows ( $resultado ) === 0) {
+        if ($resultado == false) {
 
-            $sql = "INSERT INTO carshop VALUES('0','".$product_id."','".$instructions."','".$product_amount."','".$total."', (SELECT NOW()),'1','".$session_id."' )";
-            $resultado = mysqli_query($con, $sql);  
+        $arrayJson["success"] = '0';
+        $arrayJson["message"] = 'Conexión inestable, intenta nuevamente.'.$sql;
 
-            if ($resultado == false) {
+        } else {
 
-            $arrayJson["success"] = '0';
-            $arrayJson["message"] = 'Conexión inestable, intenta nuevamente.'.$sql;
-
-            } else {
-
-                $arrayJson['success'] = '1';
-                $arrayJson['message'] = 'Agregado al carrito';            
-            }
-        }
-        else{
-            $arrayJson['success'] = '3';
-            $arrayJson['message'] = 'Ya agregó el producto al carrito de compras.';  
-        }
-        
+            $arrayJson['success'] = '1';
+            $arrayJson['message'] = 'Dirección agregada con exito.';            
+        }        
 
     }else{
         $arrayJson['success'] = '2';

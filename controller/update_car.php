@@ -28,7 +28,7 @@
         }
         else{ 
 
-            $sql = "UPDATE carshop SET carshop_product_amount = '".$carshop_product_amount."' , carshop_instructions = '".$carshop_instructions."', carshop_total = $carshop_total WHERE carshop_product_id = '".$product_id."' AND carshop_session_id = '".$session_id."';";
+            $sql = "UPDATE carshop SET carshop_product_amount = '".$carshop_product_amount."' , carshop_instructions = '".$carshop_instructions."', carshop_total = $carshop_total, carshop_date = (SELECT NOW()) WHERE carshop_product_id = '".$product_id."' AND carshop_session_id = '".$session_id."';";
             $resultado = mysqli_query($con, $sql);  
 
             if ($resultado == false) {

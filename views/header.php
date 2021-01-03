@@ -46,7 +46,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
 
 </head>
-<body class="hold-transition sidebar-mini">
+<body class="hold-transition sidebar-mini sidebar-collapse">
 <p id="session_id" style ="display: none;"><?php echo $_SESSION["id_session"]; ?></p>
 <div class="wrapper">
 
@@ -72,7 +72,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
 
   <section>
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <aside class="main-sidebar sidebar-light-primary elevation-4">
       <!-- Brand Logo -->
       <a href="../index.php" class="brand-link">
         <img src="dist/img/MLogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"

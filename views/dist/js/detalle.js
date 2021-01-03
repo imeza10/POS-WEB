@@ -22,8 +22,6 @@ $(document).ready(function() {
 
         var prod_name = $("#product_name").html();
         var subtotal = $("#subtotal-" + prod_name).html();
-        console.log("Product Name: " + prod_name);
-        console.log("Subtotal: " + subtotal);
 
     });
 
@@ -44,14 +42,12 @@ $(document).ready(function() {
     });
 
     function agregar() {
-        console.log("Agregado");
 
         var product_id = $("#product_id").html();
         var instructions = $("#instructions").val();
         var product_amount = parseInt($("#amount").val());
         var total = $("#total").html().replace('Total: $', '').replace('.', '').replace(',', '');
         var session_id = $("#session_id").html();
-        console.log("Post var" + product_id + " - " + instructions + " - " + product_amount + " - " + total + " - " + session_id);
 
         $.ajax({
             url: "../controller/add_car.php",
@@ -59,8 +55,6 @@ $(document).ready(function() {
             type: "POST",
             dataType: "json",
             success: function(datos) {
-
-                console.log(datos);
 
                 switch (datos.success) {
                     case "0":
@@ -102,9 +96,6 @@ $(document).ready(function() {
 //**INICIO DE FUNCIONES ***/
 
 function btmas(product_id, item, session_id) {
-    console.log("Id elemento: " + product_id + ", item: " + item);
-
-    console.log("Cantidad: " + $("#amount-" + item).val().toLocaleString().trim());
 
     var cantidad = parseInt($("#amount-" + item).val());
     cantidad += 1;
@@ -118,7 +109,6 @@ function btmas(product_id, item, session_id) {
 }
 
 function btmenos(product_id, item, session_id) {
-    console.log("Id elemento: " + product_id + ", item: " + item);
 
     var cantidad = parseInt($("#amount-" + item).val());
     if (cantidad != 1)
@@ -140,7 +130,7 @@ function price(cantidad, item, session_id) {
     $("#subtotal-" + item).html("Subtotal $" + parseFloat(subtotal).toLocaleString(window.document.documentElement.lang));
 
     $(".item-product-price-detail").each(function() {
-        console.log("Elemento: " + $(this).html() + ", valor: " + parseFloat($(this).html().replace('Subtotal $', '').replace(',', '').replace('.', '')));
+        //console.log("Elemento: " + $(this).html() + ", valor: " + parseFloat($(this).html().replace('Subtotal $', '').replace(',', '').replace('.', '')));
         total += parseFloat($(this).html().replace('Subtotal $', '').replace(',', '').replace('.', ''));
     });
 
@@ -152,7 +142,7 @@ function price(cantidad, item, session_id) {
 
 function bteliminar(product_id, session_id) {
 
-    console.log("Id elemento: " + product_id + ", session_id: " + session_id);
+    //console.log("Id elemento: " + product_id + ", session_id: " + session_id);
 
     $.ajax({
         url: "../controller/del_car.php",
@@ -161,7 +151,7 @@ function bteliminar(product_id, session_id) {
         dataType: "json",
         success: function(datos) {
 
-            console.log(datos);
+            //console.log(datos);
 
             if (datos.success == "1") {
                 toastr.success(datos.message);
@@ -174,7 +164,7 @@ function bteliminar(product_id, session_id) {
 
                 var total = 0;
                 $(".item-product-price-detail").each(function() {
-                    console.log("Elemento: " + $(this).html() + ", valor: " + parseFloat($(this).html().replace('Subtotal $', '').replace(',', '').replace('.', '')));
+                    //console.log("Elemento: " + $(this).html() + ", valor: " + parseFloat($(this).html().replace('Subtotal $', '').replace(',', '').replace('.', '')));
                     total += parseFloat($(this).html().replace('Subtotal $', '').replace(',', '').replace('.', ''));
                 });
 
@@ -195,7 +185,7 @@ function bteliminar(product_id, session_id) {
 
 function update_car(carshop_product_amount, carshop_instructions, carshop_total, product_id, session_id) {
 
-    console.log("Datos: " + carshop_product_amount + ", " + carshop_instructions + ", " + carshop_total + ", " + product_id + ", " + session_id);
+    //console.log("Datos: " + carshop_product_amount + ", " + carshop_instructions + ", " + carshop_total + ", " + product_id + ", " + session_id);
 
     $.ajax({
         url: "../controller/update_car.php",
@@ -204,11 +194,11 @@ function update_car(carshop_product_amount, carshop_instructions, carshop_total,
         dataType: "json",
         success: function(datos) {
 
-            console.log(datos);
+            //console.log(datos);
 
             if (datos.success == "1") {
                 //toastr.success(datos.message);
-                console.log(datos.message);
+                //console.log(datos.message);
             }
 
             if (datos.success == "0") {
@@ -223,29 +213,22 @@ function update_car(carshop_product_amount, carshop_instructions, carshop_total,
 
 }
 
-function pagar(session_id) {
-    console.log("Datos: " + session_id);
-
-
-
-
-
-}
-
 /**FIN METODOS CARSHOP */
 
 /**INICIO METODOS SALES */
 
-function domicilio(total) {
+function domicilio(total, session_id) {
 
     $(".address-new").show('1000');
     $(".vlr-domi").show('1000');
     $(".new-address-form").hide('1000');
 
+    $('#direcciones').empty();
+
     var domicilio = $("#domicilio").html().replace('Domicilio: $', '').replace(',', '').replace('.', '');
-
-
     $("#total").html("Total: $" + (parseFloat(total) + parseFloat(domicilio)).toLocaleString(window.document.documentElement.lang));
+
+    //console.log("Datos: " + session_id);
 
     $.ajax({
         url: "../controller/get_address.php",
@@ -254,19 +237,25 @@ function domicilio(total) {
         dataType: "json",
         success: function(datos) {
 
-            console.log(datos);
+            //console.log("Datos: " + Object.keys(datos).length + " - Estado: " + datos[0].success);
 
-            if (datos.success == "1") {
-                //toastr.success(datos.message);
-                console.log(datos.message);
-            }
+            if (datos[0].success == "1") {
 
-            if (datos.success == "0") {
-                toastr.error(datos.message);
-            }
+                //Limpio el select porque se ejecuta dos veces la peticion ajax
+                //$('select').empty().append('Seleccionar');
 
-            if (datos.success == "2") {
-                toastr.warning(datos.message);
+                for (var i = 0; i < parseInt(Object.keys(datos).length); i++)
+                    $('#direcciones').append('<option value="' + datos[i].cl_id + '">' + datos[i].cl_alias_address + '</option>');
+
+
+                /***OTRA FORMA DE LLENAR EL SELECT */
+                /*
+                $(datos).each(function(i, v) { // indice, valor
+                    $('#direcciones').append('<option value="' + datos[i].cl_address + '">' + datos[i].cl_alias_address + '</option>');
+                })
+                */
+            } else {
+                $('#direcciones').append('<option value="0">Agregue una dirección</option>');
             }
         }
     });
@@ -283,35 +272,111 @@ function sitio(total) {
     $(".vlr-domicilio").hide('1000');
 
     $("#total").html("Total: $" + parseFloat(total).toLocaleString(window.document.documentElement.lang));
+}
+
+function guardar_address(session_id, total) {
+
+    var email = $("#email").val();
+    var name = $("#name").val();
+    var phone = $("#phone").val();
+    var address = $("#direccion").val();
+    var tipo_domicilio = $('#type option:selected').text();
+    var detail_address = $("#detail_address").val();
+    var alias_address = $("#alias_address").val();
+    var instructions_address = $("#details").val();
+
+    //VALIDAMOS EL FORMULARIO ANTES DE GUARDARLO CON ESTA LINEA...
+    //$("#form-address-new").validate();
+
+    if (validar_form_dir())
+        $.ajax({
+            url: "../controller/add_cliente.php",
+            data: { email: email, name: name, phone: phone, address: address, type_address: tipo_domicilio, detail_address: detail_address, alias_address: alias_address, instructions_address: instructions_address, session_id: session_id },
+            type: "POST",
+            dataType: "json",
+            success: function(datos) {
+
+                if (datos.success == "1") {
+                    toastr.success(datos.message);
+                    domicilio(total, session_id);
+                    limpiar_form_dir();
+                }
+
+                if (datos.success == "0") {
+                    toastr.error(datos.message);
+                }
+
+                if (datos.success == "2") {
+                    toastr.warning(datos.message);
+                }
+            }
+        });
+
 
 }
 
-function guardar_address() {
+function validar_form_dir() {
 
-    $.ajax({
-        url: "../controller/add_cliente.php",
-        data: { session_id: session_id },
-        type: "POST",
-        dataType: "json",
-        success: function(datos) {
+    var email = $("#email").val();
+    var name = $("#name").val();
+    var phone = $("#phone").val();
+    var address = $("#direccion").val();
+    var tipo_domicilio = $('#type option:selected').text();
+    var detail_address = $("#detail_address").val();
+    var alias_address = $("#alias_address").val();
+    var instructions_address = $("#details").val();
 
-            console.log(datos);
+    console.log();
 
-            if (datos.success == "1") {
-                //toastr.success(datos.message);
-                console.log(datos.message);
-            }
 
-            if (datos.success == "0") {
-                toastr.error(datos.message);
-            }
+    if (email == "" || !email.includes("@")) {
+        toastr.warning("Ingrese un correo valido.");
+        $("#email").focus();
+        return false;
+    }
 
-            if (datos.success == "2") {
-                toastr.warning(datos.message);
-            }
-        }
-    });
+    if (name == "") {
+        toastr.warning("Ingrese un nombre valido.");
+        $("#name").focus();
+        return false;
+    }
+
+    if (phone == "0" || phone == "" || phone.length < 5) {
+        toastr.warning("Ingrese un telefono valido.");
+        $("#phone").focus();
+        return false;
+    }
+
+    if (address == "") {
+        toastr.warning("Ingrese una direccion valida.");
+        $("#direccion").focus();
+        return false;
+    }
+
+    return true;
 }
 
+function limpiar_form_dir() {
+    $("#email").val('');
+    $("#name").val('');
+    $("#phone").val('');
+    $("#direccion").val('');
+    $('#type').val('');
+    $("#detail_address").val('');
+    $("#alias_address").val('');
+    $("#details").val('');
+}
+
+
+
+
+function pagar(session_id) {
+    console.log("Datos: " + session_id);
+
+
+
+
+
+}
 
 /**FIN METODOS SALES */
